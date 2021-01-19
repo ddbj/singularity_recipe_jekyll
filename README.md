@@ -22,7 +22,7 @@ Singularityは各自のマシンで用意してください。https://sylabs.io/
 
     sudo singularity build jekyll390CentOS.sif jekyll390_CentOS7
 
-~/recipeディレクトリにダウンロードしてきたrecipeファイルを使って、~/sifディレクトリにコンテナを作成する例
+ホームのrecipeディレクトリにダウンロードしてきたrecipeファイルを使って、~/sifディレクトリにコンテナを作成する例
 
     sudo singularity build ~/sif/jekyll390CentOS.sif ~/recipe/jekyll390_CentOS7
 
