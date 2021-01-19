@@ -1,7 +1,7 @@
 # singularity_recipe_jekyll
 Jekyllのsingularity containerを作成できるrecipeファイルを置いています。
 
-## ファイル名が示す意味
+# ファイル名が示す意味
 例えば、`jekyll390_CentOS7` の場合
 
     jekyll + 390 + CentOS + 7
@@ -12,7 +12,7 @@ Jekyllのsingularity containerを作成できるrecipeファイルを置いて�
 
 を使えばよいことになります。
 
-## Singularity コンテナを作成する
+# Singularity コンテナを作成する
 Singularityは各自のマシンで用意してください。https://sylabs.io/docs/ の各バージョン横にある User Guide 内にインストール方法が載っています。なお、コンテナ作成ではsudo権が必要です。
 
     コマンド
@@ -26,17 +26,17 @@ Singularityは各自のマシンで用意してください。https://sylabs.io/
 
     sudo singularity build ~/sif/jekyll390CentOS.sif ~/recipe/jekyll390_CentOS7
 
-## 作成したコンテナでJekyllを実行する
+# 作成したコンテナでJekyllを実行する
 作成したコンテナを指定してJekyllを実行できます。コンテナの実行にはsudoは不要です。~/sifディレクトリにコンテナを作成したのであれば、次の書式でコマンドを実行します。
 
     singularity exec ~/sif/jekyll390CentOS.sif 実行命令
 
-### 編集後のページを見たい・見せたい
+## 編集後のページを見たい・見せたい
 Jekyll build とは
 
 Jekyllにおいて、各自が編集するのはMarkdownファイル(.md)であり、編集したmdファイルを各自がGitHubにpushします。実際のWebサーバー上には、GitHubから最新のmdファイルが取得され、mdファイルのコンテンツにヘッダー・フッター、js、cssなどが適用されたhtmlが置かれます。Jekyllでは、mdファイルを基にhtmlを作成することをbuildと呼んでいます。もし、各自の環境で実際のWebサーバーで見るのと同じhtmlページを作り、どのように見えるかを確認したい場合は、各自の環境でbuildを行うことで可能になります。
 
-#### htmlだけ作成したい場合
+### htmlだけ作成したい場合
 
     編集対象のディレクトリにcdする
     　↓
@@ -44,7 +44,7 @@ Jekyllにおいて、各自が編集するのはMarkdownファイル(.md)であ�
     　↓
     _siteディレクトリに、htmlが作成される
 
-#### htmlを作成し、各自のマシンにあるブラウザから確認したい場合
+### htmlを作成し、各自のマシンにあるブラウザから確認したい場合
 
     編集対象のディレクトリにcdする
     　↓
@@ -60,7 +60,7 @@ Jekyllにおいて、各自が編集するのはMarkdownファイル(.md)であ�
     　↓
     http://localhost:53000 にアクセス
 
-#### htmlを作成し、ほかのマシンのブラウザで閲覧させたい場合
+### htmlを作成し、ほかのマシンのブラウザで閲覧させたい場合
 
     firewallで公開ポートを開く、必要に応じてその公開ポートでのアクセス制限を行う
     　↓
@@ -72,5 +72,3 @@ Jekyllにおいて、各自が編集するのはMarkdownファイル(.md)であ�
     かつ_siteディレクトリには、htmlが作成される
 
 Singularityコンテナの実行詳細については、https://sylabs.io/docs/ の各バージョン横にある User Guideを参照して下さい。
-
-
