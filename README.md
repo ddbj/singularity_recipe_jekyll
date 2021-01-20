@@ -1,5 +1,5 @@
 # singularity_recipe_jekyll
-Jekyllのsingularityコンテナを作成するためのrecipeファイルを設置しています。
+DDBJ homepageは[Jekyll](https://jekyllrb.com/)で作られています。ここに設置した[Singularity](https://sylabs.io/) recipeファイルを使うことで、DDBJ homepage用のjekyllを実行環境がインストールされたsingularityコンテナを、各自のマシン上で作成できます。
 
 # ファイル名が示す意味
 例えば、`jekyll390_CentOS7` の場合
@@ -15,7 +15,7 @@ Jekyllのsingularityコンテナを作成するためのrecipeファイルを設
 # CentOSかUbuntuではどちらがよいか
 インストールされているJekyllの機能は一緒なので、好みで選択して構いません。もし迷ったらCentOS版を使ってください。Ubuntu版では、あなたの homeの環境変数LANGがen_US.UTF-8(おそらく、ja_JP.UTF-8でない場合)のとき、以降に書かれているJekyllコマンド実行時に特定のRubygemがエラーになります。Ubuntu版では各自の実行環境で次の設定が必要です。CentOS版では必要ありません。
 
-    export LANG="ja_JP.UTF-8"
+    export LANG=ja_JP.UTF-8
 
 # Singularity コンテナを作成する
 Singularityは各自のマシンで用意してください。https://sylabs.io/docs/ の各バージョン横にある User Guide 内にインストール方法が載っています。なお、コンテナ作成ではsudo権が必要です。
@@ -36,17 +36,33 @@ Singularityは各自のマシンで用意してください。https://sylabs.io/
 
     singularity exec ~/sif/jekyll390CentOS.sif 実行命令
 
-## 編集後のページを見たい・見せたい
+# Jekyll実行の前に行うこと
+gitの使い方を覚えましょう。そして、GitHub https://github.com/ddbj/www.git にあるDDBJ homepageレポジトリをあなたのマシンにクローンしてください。そこがあなた自身の編集環境になります。
+
+# Gemfileを編集、クローン直後のGemfile.lockを削除
+クローンしたファイル内には Gemfile、Gemfile.lock というファイルが含まれているはずです。以降に記載されたコマンドを各自のマシンで実行するためには、まず Gemfile の編集とGemfile.lockファイルの削除が必要です。
+まず、Gemfile.lockを削除して下さい。つづいてGemfileを編集します。変更箇所は以下の2か所です。
+
+    - クローン直後のGemfile.lockを削除する
+    rm Gemfile.lock
+    
+    - Gemfileを編集
+    gem "jekyll", "~> 3.8.5"
+    　↓　~> を >= に変える
+    gem "jekyll", ">= 3.8.5"
+
+    gem "github-pages", group: :jekyll_plugins
+    　↓　この行をコメントアウトする
+    # gem "github-pages", group: :jekyll_plugins
+
+# 編集後のページを見たい・見せたい
 Jekyll build とは
 
 Jekyllにおいて、各自が編集するのはMarkdownファイル(.md)であり、編集したmdファイルを各自がGitHubにpushします。実際のWebサーバー上には、GitHubから最新のmdファイルが取得され、mdファイルのコンテンツにヘッダー・フッター、js、cssなどが適用されたhtmlが置かれます。Jekyllでは、mdファイルを基にhtmlを作成することをbuildと呼んでいます。もし、各自の環境で実際のWebサーバーで見るのと同じhtmlページを作り、どのように見えるかを確認したい場合は、各自の環境でbuildを行うことで可能になります。
 
-### 全mdファイルを対象にhtmlを作成したい場合
+## 全mdファイルを対象にhtmlを作成したい場合
 
     編集対象のディレクトリにcdする
-    　↓
-    rm Gemfile.lock
-    Gemfile編集(gem "jekyll", "~> 3.8.5" を gem "jekyll", ">= 3.8.5" にする)
     　↓
     singularity exec ~/sif/jekyll390CentOS.sif jekyll build
     　↓
@@ -63,13 +79,10 @@ jekyll buildをオプション指定なしで実行すると、すべてのmdフ
 
 **Jekyll 4.2では、--incrementalがデフォルトで適用されるため、--watchのみでも良いようです**
 
-### htmlを作成し、各自のマシンにあるブラウザから確認したい場合
+## htmlを作成し、各自のマシンにあるブラウザから確認したい場合
 Jekyllの簡易サーバー機能を利用して、自分のブラウザでbuildされたhtmlページを閲覧することができます。`--incremental --watch`オプションと併用すれば、mdファイルを編集しながら、同時にブラウザでhtmlの確認も行うことができます。
 
     編集対象のディレクトリにcdする
-    　↓
-    rm Gemfile Gemfile.lock
-    Gemfile編集(gem "jekyll", "~> 3.8.5" を gem "jekyll", ">= 3.8.5" にする)
     　↓
     singularity exec ~/sif/jekyll390CentOS.sif bundle exec jekyll serve
     または
@@ -88,15 +101,12 @@ Jekyllの簡易サーバー機能を利用して、自分のブラウザでbuild
     http://localhost:53000 にアクセス
     停止はctrl+c
 
-### htmlを作成し、ほかのマシンのブラウザで閲覧させたい場合
+## htmlを作成し、ほかのマシンのブラウザで閲覧させたい場合
 `--host=0.0.0.0`オプションを加えると、buildされたhtmlを自分のマシンのIPから公開することができます。Firewallでポートを開く必要があるので、この方法はセキュリティの知識のある方だけに限定します。
 
     firewallで公開ポートを開く、必要に応じてその公開ポートでのアクセス制限を行う
     　↓
     編集対象のディレクトリにcdする
-    　↓
-    rm Gemfile.lock
-    Gemfile編集(gem "jekyll", "~> 3.8.5" を gem "jekyll", ">= 3.8.5" にする)
     　↓
     singularity exec ~/sif/jekyll390CentOS.sif bundle exec jekyll serve --port=公開ポート番号 --host=0.0.0.0
     または
