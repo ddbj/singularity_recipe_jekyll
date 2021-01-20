@@ -41,7 +41,7 @@ gitの使い方を覚えましょう。そして、GitHub https://github.com/ddb
 
 # Gemfileを編集、クローン直後のGemfile.lockを削除
 クローンしたファイル内には Gemfile、Gemfile.lock というファイルが含まれているはずです。以降に記載されたコマンドを各自のマシンで実行するためには、まず Gemfile の編集とGemfile.lockファイルの削除が必要です。
-まず、Gemfile.lockを削除して下さい。つづいてGemfileを編集します。変更箇所は以下の2か所です。
+まず、Gemfile.lockを削除して下さい。つづいてGemfileを編集します。修正箇所は以下の2か所です。
 
     - クローン直後のGemfile.lockを削除する
     rm Gemfile.lock
@@ -52,8 +52,12 @@ gitの使い方を覚えましょう。そして、GitHub https://github.com/ddb
     gem "jekyll", ">= 3.8.5"
 
     gem "github-pages", group: :jekyll_plugins
-    　↓　この行をコメントアウトする
-    # gem "github-pages", group: :jekyll_plugins
+    　↓　github-pages 直後にバージョン番号を加える
+    ・Jekyll 3.9.0 の場合 "209" にする
+    gem "github-pages", "209", group: :jekyll_plugins
+    
+    ・Jekyll 3.8.5 の場合は "204" にする
+    gem "github-pages", "204", group: :jekyll_plugins
 
 # 編集後のページを見たい・見せたい
 Jekyll build とは
