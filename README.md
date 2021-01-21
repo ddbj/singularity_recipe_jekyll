@@ -16,7 +16,7 @@ DDBJ homepageは[Jekyll](https://jekyllrb.com/)で作られています。ここ
 Jekyll 3.85、3.90、および 4.20 の3つのJekyllバージョン用recipeファイルを用意しています。各自の環境だけでページ確認をすることが目的であれば、速度の速い、一番新しいバージョンを使用するのが使いやすいでしょう。3.#.# 系のバージョンを使用して、実際に見えるhtml出力と同じものを追求してもよいでしょう。
 
 Jekyll 3.8.5
-DDBJ homepage開発初期からhtmlページ確認でこのバージョンを使用しています。www.ddbj.nig.ac.jpに設置するページは、3.8.5 を使って作られています。
+DDBJ homepage開発初期からhtmlページ確認でこのバージョンを使用しています。`www.ddbj.nig.ac.jp`に設置するページは、3.8.5 を使って作られています。
 
 Jekyll 3.9.0
 GitHubには GitHub Pagesという機能が備わっており、Jekyllを使ってリポジトリからウェブ公開を行うことができます。2021年1/21時点GitHub Pageで使用されるJekyllバージョンが 3.9.0です。
