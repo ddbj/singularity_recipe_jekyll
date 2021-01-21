@@ -34,7 +34,7 @@ From: library/default/ubuntu:20.04
     rbenv install 2.7.2
     rbenv global 2.7.2
     gem install jekyll -v=3.9.0
-    gem install github-pages
+    gem install github-pages -v=209
     gem install jekyll-haml -v=0.1.6
     gem install tzinfo-data -v=1.2020.4
     gem install wdm -v=0.1.1
