@@ -42,7 +42,6 @@ From: library/default/ubuntu:20.04
     gem install minima -v=2.5.1
     gem install jekyll-sitemap -v=1.4.0
     gem install tzinfo -v=1.2.9
-    gem install kramdown-parser-gfm -v=1.1.0
     gem uninstall public_suffix --force
     gem uninstall rouge --force
     gem install public_suffix -v=3.1.1
