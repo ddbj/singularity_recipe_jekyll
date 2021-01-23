@@ -1,5 +1,5 @@
 # singularity_recipe_jekyll
-DDBJ homepageは[Jekyll](https://jekyllrb.com/)で作られています。ここに設置した[Singularity](https://sylabs.io/) recipeファイルを使うことで、DDBJ homepage用jekyll環境がインストールされたsingularityコンテナを各自のマシン上で作成できます。
+DDBJ homepageは、静的サイトジェネレータ[Jekyll](https://jekyllrb.com/)で作られています。ここに設置した[Singularity](https://sylabs.io/) recipeファイルを使うことで、DDBJ homepage用jekyll環境がインストールされたsingularityコンテナを各自のマシン上で作成できます。
 
 # ファイル名が示す意味
 例えば、`jekyll390_CentOS7` の場合
