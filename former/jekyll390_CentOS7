@@ -1,0 +1,48 @@
+# Singularity recipe
+# Jekyll 3.9.0 w/ gh-pages plugin on the latest CentOS7
+# 
+Bootstrap: library
+From: library/default/centos:7
+
+%environment
+    export RBENV_ROOT=/opt/rbenv
+    export PATH=$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH
+    export RBENV_SHELL=bash
+
+%runscript
+
+%post
+    yum -y update
+    yum -y install apr apr-util autoconf automake avahi-libs bison boost-date-time boost-system boost-thread byacc bzip2 cscope ctags diffstat doxygen dwz dyninst efivar-libs elfutil emacs-filesystem flex gcc gcc-c++ gcc-gfortran gdb gettext-common-devel gettext-devel git gnutls indent intltool libdwarf libgfortran libgnome-keyring libmodman libproxy libquadmath libquadmath-devel libstdc++-devel libtool m4 mokutil neon nettle pakchois patch patchutils perl-Data-Dumper perl-Error perl-Git perl-TermReadKey perl-Test-Harness perl-Thread-Queue perl-XML-Parser perl-srpm-macros rcs redhat-rpm-config rpm-build rpm-sign subversion subversion-libs swig systemtap systemtap-client systemtap-devel systemtap-runtime trousers unzip zip
+    yum -y install openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel
+    yum -y install wget
+    cd /opt
+    git clone git://github.com/rbenv/rbenv.git
+    echo 'export RBENV_ROOT="/opt/rbenv"' >> /etc/bashrc
+    echo 'export PATH="${RBENV_ROOT}/bin:${PATH}"' >> /etc/bashrc
+    echo 'eval "$(rbenv init -)"' >> /etc/bashrc
+    mkdir /opt/rbenv/plugins
+    cd /opt/rbenv/plugins
+    git clone git://github.com/rbenv/ruby-build.git
+    cd /opt
+    source /etc/bashrc
+    rbenv install 2.7.2
+    rbenv global 2.7.2
+    gem install jekyll -v=3.9.0
+    gem install github-pages -v=209
+    gem install jekyll-haml -v=0.1.6
+    gem install tzinfo-data -v=1.2020.4
+    gem install wdm -v=0.1.1
+    gem install i18n -v=0.9.5
+    gem install minima -v=2.5.1
+    gem install jekyll-sitemap -v=1.4.0
+    gem install tzinfo -v=1.2.9
+    gem install kramdown-parser-gfm -v=1.1.0
+    gem uninstall public_suffix --force
+    gem uninstall rouge --force
+    gem install public_suffix -v=3.1.1
+    gem install rouge -v=3.23.0
+
+%labels
+    Author tkosuge
+    Version 1
