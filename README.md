@@ -145,7 +145,7 @@ Jekyllの簡易サーバー機能を利用して、buildされたhtmlページ�
 *Singularityコンテナ実行詳細については、https://sylabs.io/docs/ の各バージョン横にある User Guideを参照して下さい。*
 
 # 以降、過去の運用情報
-## CentOSかUbuntuではどちらがよいか
+## コンテナrecipeのOSでCentOS版かUbuntu版ではどちらがよいか
 インストールされているJekyllの機能は一緒なので、好みで選択して構いません。もし迷ったらCentOS版を使ってください。Ubuntu版では、あなたの homeの環境変数LANGがen_US.UTF-8(おそらく、ja_JP.UTF-8でない場合)のとき、以降に書かれているJekyllコマンド実行時に特定のRubygemがエラーになります。Ubuntu版では各自の実行環境で次の設定が必要です。CentOS版では必要ありません。
 
     export LANG=ja_JP.UTF-8
