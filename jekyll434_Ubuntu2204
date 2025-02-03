@@ -14,7 +14,7 @@ From: library/default/ubuntu:22.04
 %post
     apt update
     apt -y upgrade
-    apt -y install language-pack-ja
+    apt -y install language-pack-ja language-pack-en
     update-locale LANG=ja_JP.UTF-8
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
     ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
